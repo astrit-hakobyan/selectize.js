@@ -667,7 +667,7 @@
 	var highlight = function($element, pattern) {
 		if (typeof pattern === 'string' && !pattern.length) return;
 		var regex = (typeof pattern === 'string') ? new RegExp(pattern, 'i') : pattern;
-	
+
 		var highlight = function(node) {
 			var skip = 0;
 			if (node.nodeType === 3) {
@@ -683,14 +683,14 @@
 					middlebit.parentNode.replaceChild(spannode, middlebit);
 					skip = 1;
 				}
-			} else if (node.nodeType === 1 && node.childNodes && !/(script|style)/i.test(node.tagName)) {
+			} else if (node.nodeType === 1 && node.childNodes && !/(script|style)/i.test(node.tagName)  && ( node.className !== 'highlight' || node.tagName !== 'SPAN' )) {
 				for (var i = 0; i < node.childNodes.length; ++i) {
 					i += highlight(node.childNodes[i]);
 				}
 			}
 			return skip;
 		};
-	
+
 		return $element.each(function() {
 			highlight(this);
 		});
